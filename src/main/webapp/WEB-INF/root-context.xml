@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
+    <context:component-scan base-package="com.ssg.springex">
+
+    </context:component-scan>
+
+
+  <mybatis:scan base-package="com.ssg.springex.mapper"></mybatis:scan>
+    <!--마이바티스 관련된 파일 경로 표시-->
+
+
+    <bean id="hikariconfig" class="com.zaxxer.hikari.HikariConfig">
+
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ssg?serverTimezone=UTC"></property>
+        <property name="username" value="webuser"></property>
+        <property name="password" value="webuser1234"></property>
+        <property name="dataSourceProperties" >
+            <props>
+                <prop key="cachePrespStmts">true</prop>
+                <prop key="prepStmtCacheSize">250</prop>
+                <prop key="prepStmtCacheSqlLimit">2048</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <constructor-arg ref="hikariconfig"></constructor-arg>
+    </bean>
+
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+
+        <property name="mapperLocations" value="classpath:/mappers/**/*.xml"></property>
+    </bean>
+
+
+
+
+<!--    <bean class="com.ssg.springex.sample.SampleDAO"></bean>-->
+<!--    <bean class="com.ssg.springex.sample.SampleService"></bean>-->
+</beans><!--호출해서 사용할 빈들을 적어놓는 태그-->
