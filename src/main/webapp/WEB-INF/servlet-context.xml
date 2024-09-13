@@ -21,13 +21,14 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
-    <contet:component-scan base-package="com.ssg.springex.controller"><!--프론트 컨트롤러한테 어느 위치에 컨트롤러 있는지 바인딩-->
+    <contet:component-scan base-package="com.ssg.springtodoservice.controller"><!--프론트 컨트롤러한테 어느 위치에 컨트롤러 있는지 바인딩-->
     </contet:component-scan>
 
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="formatters"><!--이름은 직접 지정-->
             <set>
-                <bean class="com.ssg.springex.controller.formatter.LocalDateFormatter"></bean>
+                <bean class="com.ssg.springtodoservice.controller.formatter.LocalDateFormatter"></bean>
+                <bean class="com.ssg.springtodoservice.controller.formatter.CheckboxFormatter"></bean>
             </set>
         </property>
     </bean>

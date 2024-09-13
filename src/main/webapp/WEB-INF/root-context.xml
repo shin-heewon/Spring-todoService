@@ -8,12 +8,14 @@
        http://www.springframework.org/schema/context
        https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-    <context:component-scan base-package="com.ssg.springex">
+    <context:component-scan base-package="com.ssg.springtodoservice.config"> <!--configuration 클래스들이 있는 패키지를 스캔하여 스프링 컨테이너에 빈 등록 하도록 패키지 위치 표시-->
+
+    </context:component-scan>
+    <context:component-scan base-package="com.ssg.springtodoservice.service">
 
     </context:component-scan>
 
-
-  <mybatis:scan base-package="com.ssg.springex.mapper"></mybatis:scan>
+  <mybatis:scan base-package="com.ssg.springtodoservice.mapper"></mybatis:scan>
     <!--마이바티스 관련된 파일 경로 표시-->
 
 
